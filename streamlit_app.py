@@ -22,4 +22,17 @@ def get_data():
 
 # Call the function to get the data
 spreadsheet_data = get_data()
-print(spreadsheet_data)
+
+# Convert the data to a DataFrame
+df = pd.DataFrame(spreadsheet_data[1:], columns=spreadsheet_data[0])
+
+# Print the DataFrame
+print(df)
+
+# Draw line chart
+st.write('Line Chart')
+chart = alt.Chart(df).mark_line().encode(
+    x='dt',
+    y='temp'
+).interactive()
+st.altair_chart(chart, use_container_width=True)
